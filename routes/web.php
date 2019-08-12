@@ -24,3 +24,9 @@ Route::resource('books', 'BooksController');
 Route::resource('students','StudentsController');
 
 
+Route::get('/getstatus','BooksController@getStatus');
+
+
+Route::get('/activestore','StudentsController@activeStore');
+
+Route::resource('studentprofiles','StudentProfilesController');

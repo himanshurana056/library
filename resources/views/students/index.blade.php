@@ -5,6 +5,12 @@
 
 
 <div class="container">
+
+             <center><h1> <u>listing of students</u></h1></center>
+
+
+             
+
     <a href="{{ route('students.create') }}" class="btn btn-success">Add New student </a>
 
 
@@ -19,6 +25,8 @@
                         <th> Adharcard Address </th>
                         <th> state </th>
                         <th> city </th>
+                        <th> status </th>
+                        <th> dropdown </th>
                         <th colsapn = 2> Action </th>                                
                     </tr>
              </thead>
@@ -35,6 +43,14 @@
                     <td>{{$student->adharcard_address}}</td>
                     <td>{{$student->state}}</td>
                     <td>{{$student->city}}</td>
+                    <td>{{$student->status}}</td>
+                     <input type="hidden" id ="student-id" value="{{$student->id}}">
+                     <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
+                    <td><select data-id="{{$student->id}}" name="manage" id="manage-active">
+                    <option value="1" @if ($student->status == 1) selected @endif> in active </option>
+                        <option value="0" @if ($student->status == 0) selected @endif> no active </option>
+                             </select> 
+                             </td>  
                     
 <!-- code for student edit -->
                     <td>
@@ -43,7 +59,7 @@
 <!-- code for student delete -->
 
                     <td>
-                        <form action="{{ route('students.destroy',                      $student->id)}}" method="post">
+                        <form action="{{ route('students.destroy',$student->id)}}" method="post">
 
                             <input type="hidden" name="_method" value="DELETE"/>
                             <button class="btn btn-primary"     type="submit">Delete</button>
@@ -51,14 +67,11 @@
                         </form>
                     </td>
                 </tr>
-
-
-                
-        
             @endforeach
         </tbody>
 
 
      </table>
 </div>   
+
 @endsection  

@@ -44,11 +44,23 @@ class BooksController extends Controller
      */
     public function store(Request $request)
     {
-        
+
+
+
+        // $request->validate([
+        //     'book_name'=>'required',
+        //     'auther_name'=>'required',
+        //     'description'=>'required',
+        // ]);
+
+
+        //dd($request->all());
+        $status = $request->status;
         $book = new book ([
             'book_name'   => $request->get('book_name'),
             'auther_name' => $request->get('auther_name'),
-            'description' => $request->get('description')
+            'description' => $request->get('description'),
+            'status' => $request->get('status')
         ]);
        $book->save();
        return redirect('/books')->with('success','contact saved!');
@@ -87,10 +99,23 @@ class BooksController extends Controller
      */
     public function update(Request $request, $id)
     {
+
+
+
+
+        // $request->validate([
+        //     'book_name'=>'required',
+        //     'auther_name'=>'required',
+        //     'description'=>'required',
+        // ]);
+        
+
         $book = book::find($id);
+        $status = $request->status;
         $book->book_name = $request->get('book_name');
         $book->auther_name = $request->get('auther_name');
         $book->description = $request->get('description');
+        $book->status = $request->get('status');
         
         $book->save();
         return redirect('books')->with('success','contact updated');
@@ -111,7 +136,22 @@ class BooksController extends Controller
        
        return redirect('books')->with('success','book deleted');
     }
+
+
+
+    public function getStatus(Request $request)
+    {  
+        // dd($request->all());
+      $book = book::find($request->query('id'));    
+      $book->status = $request->query('valu');
+
+     $book->save();
+     return response()->json(true);
+    }
+
 }
+    
+        
 
 
-
+    

@@ -13,6 +13,7 @@ class student extends Model
         'address',
         'adharcard_address',
         'state',
-        'city'
+        'city',
+        'status'
     ];
 }

@@ -75,6 +75,82 @@
     </div>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
+
+    
+    <script src="{{ asset('js/app.js') }}"></script> 
+    <!-- <script src="{{ asset('css/style.css') }}"></script> -->
+
+
+    <script src="http://localhost:8000/js/book.js"></script>
+
+<script src="http://localhost:8000/js/student.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script> 
+
+
+
+
+          <!-- books table ajax -->
+
+<script>
+$(function(){
+  // alert("hello") 
+    $(document).on('change','#stock-manage', function(e) {
+        var valu = $(this).val();
+        var id = $(this).data('id');
+       // alert(valu + " "  + id);
+        $.ajax({
+            url: '/getstatus',
+            type: 'GET',        
+            dataType:'json',
+            data: { 
+                id: id,
+                valu:valu
+            },
+            success: function (result) {
+              //  alert(result);
+               
+                
+            },
+            error: function () {
+                // alert('error');
+            }
+        });
+    }) ;
+
+
+    // ajax with post ------------
+
+
+  // alert("hello") 
+     $(document).on('change','#manage-active', function(e) {
+         var valu = $(this).val();
+         var id = $(this).data('id');
+      // alert(valu + " "  + id );
+         $.ajax({
+             url: '/activestore',
+             type: 'GET',        
+             dataType:'json',
+             data: { 
+                 id: id,
+                 valu: valu
+             },
+           success: function (result) {
+               //  alert(result);    
+               
+             },
+            error: function () {
+                 alert('error');
+             }
+         });
+  });
+});
+
+
+  </script>
+
 </body>
 </html>
+

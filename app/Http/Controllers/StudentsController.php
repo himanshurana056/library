@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\student;
+
+
 
 class StudentsController extends Controller
 {
@@ -16,6 +19,7 @@ class StudentsController extends Controller
 
     {
          $students = student::all();
+         //dd("himanshu");
         return view('students.index',compact('students'));  
     }
 
@@ -28,6 +32,7 @@ class StudentsController extends Controller
     {
 
         return view('students.create');
+        
     }
 
     /**
@@ -39,29 +44,41 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
 
+        //dd($request->all());
+
+
         
-            // $request->validate([
-            //     'roll_no'=>'required',
-            //     'first_name'=>'required',
-            //     'last_name'=>'required',
-            //     'address'=>'required',
-            //     'adharcard_address'=>'required',
-            //     'state'=>'required',
-            //     'city'=> 'required'
-            // ]);
+        // $request->validate([
+        //     'roll_no'=>'required',
+        //     'first_name'=>'required',
+        //     'last_name'=>'required',
+        //     'address'=>'required',
+        //     'adharcard_address'=>'required',
+        //     'state'=>'required',
+        //     'city'=>'required',
+        // ]);
+
+        // return redirect ("validate");
+        
+        
+
     
-        //  dd($request->all());
-        $student = new student ([
+        //dd($request->all());
+         $status = $request->status;
+         //dd($request->all($status));
+         $student = new student
+         ([
             'roll_no'   => $request->get('roll_no'),
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
             'address' => $request->get('address'),
             'adharcard_address' => $request->get('adharcard_address'),
             'state' => $request->get('state'),
-            'city' => $request->get('city')
+            'city' => $request->get('city'),
+            'status' => $request->get('status')  
         ]);
        $student->save();
-       return redirect('students')->with('success','student saved!');
+       return redirect('/students')->with('success','student saved!');
     }
 
     /**
@@ -98,6 +115,8 @@ class StudentsController extends Controller
     public function update(Request $request, $id)
     {
 
+        
+        //dd($request->all());
         // $request->validate([
         //     'roll_no'=>'required',
         //     'first_name'=>'required',
@@ -107,8 +126,10 @@ class StudentsController extends Controller
         //     'state'=>'required',
         //     'city'=> 'required'
         // ]);
-
-        $student = student::find($id);
+       
+         $student = student::find($id);
+         $status = $request->status;
+         //dd($request->all());
 
         $student->roll_no = $request->get('roll_no');
         $student->first_name = $request->get('first_name');
@@ -117,12 +138,14 @@ class StudentsController extends Controller
         $student->adharcard_address = $request->get('adharcard_address');
         $student->state = $request->get('state');
         $student->city = $request->get('city');
-        
+        $student->status = $request->get('status');
+       
         $student->save();
+       
         return redirect('students')->with('success','student updated');
 
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
@@ -139,4 +162,17 @@ class StudentsController extends Controller
         return redirect('students')->with('success','student deleted');
 
     }
+    //ajax used in laravel
+    
+        public function activeStore(Request $request)
+        {  
+             //dd($request->all());
+      
+        $student = student::find($request->input('id'));    
+        $student->status = $request->input('valu');
+       
+
+        $student->save();
+        return response()->json(true);
+        }
 }
