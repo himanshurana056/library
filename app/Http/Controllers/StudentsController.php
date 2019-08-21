@@ -6,6 +6,10 @@ use Illuminate\Http\Request;
 
 use App\student;
 
+use App\StudentProfile;
+
+
+
 
 
 class StudentsController extends Controller
@@ -18,9 +22,12 @@ class StudentsController extends Controller
     public function index()
 
     {
+     
          $students = student::all();
          //dd("himanshu");
-        return view('students.index',compact('students'));  
+        return view('students.index',compact('students')); 
+           
+       
     }
 
     /**
@@ -32,6 +39,7 @@ class StudentsController extends Controller
     {
 
         return view('students.create');
+       
         
     }
 
@@ -44,29 +52,11 @@ class StudentsController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request->all());
-
-
         
-        // $request->validate([
-        //     'roll_no'=>'required',
-        //     'first_name'=>'required',
-        //     'last_name'=>'required',
-        //     'address'=>'required',
-        //     'adharcard_address'=>'required',
-        //     'state'=>'required',
-        //     'city'=>'required',
-        // ]);
-
-        // return redirect ("validate");
-        
-        
-
-    
-        //dd($request->all());
          $status = $request->status;
-         //dd($request->all($status));
+        
          $student = new student
+       
          ([
             'roll_no'   => $request->get('roll_no'),
             'first_name' => $request->get('first_name'),
@@ -77,8 +67,29 @@ class StudentsController extends Controller
             'city' => $request->get('city'),
             'status' => $request->get('status')  
         ]);
+    
        $student->save();
+    
+        // student profile editing
+               $studentprofile = new studentprofile
+              
+               
+                ([
+                    'date_of_birth' => $request->get('date_of_birth'),
+                    'phone_no' => $request->get('phone_no'),
+                    'image' => $request->get('image'),
+                    'temporary_address' => $request->get('temporary_address')
+                  ]);
+               
+                  //dd($request->all());
+                   
+                     $studentprofile->student()->associate($student);
+                     
+                     $studentprofile->save();
+                     
+           //dd($request->all());
        return redirect('/students')->with('success','student saved!');
+        // dd($request->all());
     }
 
     /**
@@ -89,7 +100,8 @@ class StudentsController extends Controller
      */
     public function show($id)
     {
-        //
+     //  echo "<h1> joining of table </h1>";
+       
     }
 
     /**
@@ -101,7 +113,10 @@ class StudentsController extends Controller
     public function edit($id)
     {
         $student = student::find($id);
-      //echo "<pre>"; print_r($students); die;
+
+        //$studentprofile = studentProfile::find($id);
+       
+        //echo "<pre>"; print_r($students); die;
         return view('students.edit',compact('student'));
     }
 
@@ -117,19 +132,12 @@ class StudentsController extends Controller
 
         
         //dd($request->all());
-        // $request->validate([
-        //     'roll_no'=>'required',
-        //     'first_name'=>'required',
-        //     'last_name'=>'required',
-        //     'address'=>'required',
-        //     'adharcard_address'=>'required',
-        //     'state'=>'required',
-        //     'city'=> 'required'
-        // ]);
        
-         $student = student::find($id);
+       
+         $student = Student::find($id);
+      
          $status = $request->status;
-         //dd($request->all());
+         
 
         $student->roll_no = $request->get('roll_no');
         $student->first_name = $request->get('first_name');
@@ -139,10 +147,22 @@ class StudentsController extends Controller
         $student->state = $request->get('state');
         $student->city = $request->get('city');
         $student->status = $request->get('status');
-       
+        
         $student->save();
-       
-        return redirect('students')->with('success','student updated');
+
+      
+        $profile = $student->student_profile;
+         //dd($request->all());
+               
+                $profile->date_of_birth = $request->input('date_of_birth');
+                $profile->phone_no = $request->input('phone_no');
+                $profile->image = $request->input('image');
+               
+         
+    
+
+          $student->student_profile->save();
+        return redirect('students')->with('success','students updated');
 
     }
     
@@ -175,4 +195,6 @@ class StudentsController extends Controller
         $student->save();
         return response()->json(true);
         }
+
+
 }

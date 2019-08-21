@@ -4,7 +4,10 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\student;
-class student extends Model
+use App\StudentProfile;
+use App\StudentAdresses;
+
+class Student extends Model
 {
     protected $fillable = [
         'roll_no',
@@ -16,4 +19,15 @@ class student extends Model
         'city',
         'status'
     ];
+
+    public function student_profile()
+    {
+        return $this->hasOne('App\StudentProfile');
+    }
+
+    // public function student_addresses()
+    // {
+    //     return $this->
+    // }
 }
+

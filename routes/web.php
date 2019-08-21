@@ -19,14 +19,12 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::resource('books', 'BooksController');
-
-Route::resource('students','StudentsController');
-
+Route::resource('/books', 'BooksController')->middleware('auth');
 
 Route::get('/getstatus','BooksController@getStatus');
 
+Route::resource('/students','StudentsController')->middleware('auth');
 
-Route::get('/activestore','StudentsController@activeStore');
+Route::resource('/student_profiles','StudentProfilesController')->middleware('auth');
 
-Route::resource('studentprofiles','StudentProfilesController');
+ Route::get('/activestore','StudentsController@activeStore');

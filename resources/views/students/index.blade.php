@@ -21,14 +21,22 @@
                         <th> Roll no</th>
                         <th> First Name </th>
                         <th> Last Name </th>
-                        <th> Address </th>
+                        <!-- <th> Address </th> -->
                         <th> Adharcard Address </th>
                         <th> state </th>
                         <th> city </th>
                         <th> status </th>
                         <th> dropdown </th>
-                        <th colsapn = 2> Action </th>                                
+                        
+            <!-- students profiles -->
+                         <!-- <th> Id </th> -->
+                         <th> Date of Birth </th>
+                         <th> Phone No</th>
+                         <!-- <th> Temporary Address </th> -->
+                         <th> Image </th>  
+                         <th colsapn = 2> Action </th>                              
                     </tr>
+                       
              </thead>
         <tbody>
 
@@ -39,18 +47,26 @@
                     <td>{{$student->roll_no}}</td>
                     <td>{{$student->first_name}}</td>
                     <td>{{$student->last_name}}</td>
-                    <td>{{$student->address}}</td>
+                    <!-- <td>{{$student->address}}</td> -->
                     <td>{{$student->adharcard_address}}</td>
                     <td>{{$student->state}}</td>
                     <td>{{$student->city}}</td>
                     <td>{{$student->status}}</td>
                      <input type="hidden" id ="student-id" value="{{$student->id}}">
-                     <!-- <input type="hidden" name="_token" value="{{ csrf_token() }}"> -->
+                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <td><select data-id="{{$student->id}}" name="manage" id="manage-active">
                     <option value="1" @if ($student->status == 1) selected @endif> in active </option>
                         <option value="0" @if ($student->status == 0) selected @endif> no active </option>
                              </select> 
-                             </td>  
+                              </td> 
+                             <td>{{$student->student_profile->date_of_birth}}</td>
+                             <td>{{$student->student_profile->phone_no}}</td>
+                             <!-- <td>{{$student->student_profile->temporary_address}}</td> -->
+                             <td>{{$student->student_profile->image}}</td> 
+                    
+                    
+
+
                     
 <!-- code for student edit -->
                     <td>
@@ -69,6 +85,7 @@
                 </tr>
             @endforeach
         </tbody>
+        
 
 
      </table>

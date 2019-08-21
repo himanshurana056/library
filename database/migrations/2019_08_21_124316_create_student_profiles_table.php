@@ -15,12 +15,14 @@ class CreateStudentProfilesTable extends Migration
     {
         Schema::create('student_profiles', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('student_id')->nullable();
             $table->datetime('date_of_birth');
             $table->integer('phone_no');
             $table->text('temporary_address');
             $table->string('image');
-            $table->timestamps( );
+            $table->timestamps();
         });
+         
     }
 
     /**

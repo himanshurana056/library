@@ -25,7 +25,7 @@
                             </div>
                         </div>
 <!-- first name addition -->
-
+<!-- 
 <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                             <label for="name" class="col-md-4 control-label">FirstName</label>
 
@@ -38,10 +38,10 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 <!-- last name addition -->
 
-<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
+<!-- <div class="form-group{{ $errors->has('last_name') ? ' has-error' : 'last_name' }}">
                             <label for="name" class="col-md-4 control-label">LirstName</label>
 
                             <div class="col-md-6">
@@ -53,40 +53,40 @@
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
  <!-- user name addition -->
 
-<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">UsertName</label>
+<!-- <div class="form-group{{ $errors->has('user_name') ? ' has-error' : 'user_name' }}">
+                            <label for="name" class="col-md-4 control-label">UserName</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="usertname" value="{{ old('name') }}" required autofocus>
+                                <input id="user_name" type="text" class="form-control" name="user_name" value="{{ old('user_name') }}" required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('user_name'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('user_name') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
 
  <!--  phone number addition -->
 
-<div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Phone number</label>
+<!-- <div class="form-group{{ $errors->has('phone_no') ? ' has-error' : 'phone_no' }}">
+                            <label for="phone_no" class="col-md-4 control-label">Phone number</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="phone number" value="{{ old('name') }}" required autofocus>
+                                <input id="phone_no" type="text" class="form-control" name="phone number"  required autofocus>
 
-                                @if ($errors->has('name'))
+                                @if ($errors->has('phone_no'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('name') }}</strong>
+                                        <strong>{{ $errors->first('phone_no') }}</strong>
                                     </span>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
 
 

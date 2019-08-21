@@ -149,6 +149,13 @@ class BooksController extends Controller
      return response()->json(true);
     }
 
+// applying auth login -----
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
 }
     
         
