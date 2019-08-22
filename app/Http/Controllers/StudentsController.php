@@ -8,7 +8,7 @@ use App\student;
 
 use App\StudentProfile;
 
-
+use App\StudentAddress;
 
 
 
@@ -22,9 +22,9 @@ class StudentsController extends Controller
     public function index()
 
     {
-     
+       
          $students = student::all();
-         //dd("himanshu");
+       
         return view('students.index',compact('students')); 
            
        
@@ -70,7 +70,8 @@ class StudentsController extends Controller
     
        $student->save();
     
-        // student profile editing
+// student profile coding
+
                $studentprofile = new studentprofile
               
                
@@ -81,13 +82,23 @@ class StudentsController extends Controller
                     'temporary_address' => $request->get('temporary_address')
                   ]);
                
-                  //dd($request->all());
+                  
                    
                      $studentprofile->student()->associate($student);
                      
                      $studentprofile->save();
-                     
-           //dd($request->all());
+
+// StudentAddresses coding
+
+                     $studentaddress = new studentaddress
+                    // dd($request->all());
+                     ([
+                         'key'=> $request->get('key'),
+                        'value'=>$request->get('value')
+                     ]);
+                 $studentaddress->student()->associate($student);
+                    // dd($request->all());
+          
        return redirect('/students')->with('success','student saved!');
         // dd($request->all());
     }
@@ -100,7 +111,7 @@ class StudentsController extends Controller
      */
     public function show($id)
     {
-     //  echo "<h1> joining of table </h1>";
+     //  
        
     }
 
@@ -114,11 +125,16 @@ class StudentsController extends Controller
     {
         $student = student::find($id);
 
-        //$studentprofile = studentProfile::find($id);
+        
        
         //echo "<pre>"; print_r($students); die;
         return view('students.edit',compact('student'));
     }
+
+    // public function add($id)
+    //        {
+    //             $studentaddress = studentaddress::find($id);
+    //        }
 
     /**
      * Update the specified resource in storage.
@@ -130,9 +146,6 @@ class StudentsController extends Controller
     public function update(Request $request, $id)
     {
 
-        
-        //dd($request->all());
-       
        
          $student = Student::find($id);
       
@@ -152,7 +165,7 @@ class StudentsController extends Controller
 
       
         $profile = $student->student_profile;
-         //dd($request->all());
+         
                
                 $profile->date_of_birth = $request->input('date_of_birth');
                 $profile->phone_no = $request->input('phone_no');
@@ -175,7 +188,7 @@ class StudentsController extends Controller
     public function destroy($id)
 
     {
-        // dd("here");
+        
         $student = student::find($id);
         $student->delete();
 

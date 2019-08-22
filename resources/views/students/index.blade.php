@@ -12,6 +12,7 @@
              
 
     <a href="{{ route('students.create') }}" class="btn btn-success">Add New student </a>
+    
 
 
     <table class="table table-striped">
@@ -65,8 +66,17 @@
                              <td>{{$student->student_profile->image}}</td> 
                     
                     
-
-
+<!-- add more popup for StudentAddress -->
+                    <td>
+                   
+                    <button onclick="myFunction()" class = "btn btn-primary">Add-More</button>
+                        
+                        <script>
+                            function myFunction() 
+                            {
+                            window.open("{{ route('Student_addresses.create',$student->id)}}");
+                            }   
+                            </script>
                     
 <!-- code for student edit -->
                     <td>

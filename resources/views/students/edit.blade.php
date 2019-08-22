@@ -10,10 +10,13 @@
 
         <form action="{{ route('students.update', $student->id) }}" method="post" id="studentedit" >
 
+       
+
                  {{ csrf_field() }}
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="id" value={{ $student->id}} />
                      <input type="hidden" class="form-control" name="_method" value="PUT" />
+
 
         </div>
            

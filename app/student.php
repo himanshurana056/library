@@ -3,9 +3,9 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\student;
+use App\Student;
 use App\StudentProfile;
-use App\StudentAdresses;
+use App\StudentAddress;
 
 class Student extends Model
 {
@@ -25,9 +25,9 @@ class Student extends Model
         return $this->hasOne('App\StudentProfile');
     }
 
-    // public function student_addresses()
-    // {
-    //     return $this->
-    // }
+    public function Student_addresses()
+    {
+        return $this->hasMany('App\StundetAddress');
+    }
 }
 

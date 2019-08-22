@@ -27,4 +27,6 @@ Route::resource('/students','StudentsController')->middleware('auth');
 
 Route::resource('/student_profiles','StudentProfilesController')->middleware('auth');
 
- Route::get('/activestore','StudentsController@activeStore');
+Route::get('/activestore','StudentsController@activeStore');
+
+Route::resource('/Student_addresses','StudentAddressesController')->middleware('auth');

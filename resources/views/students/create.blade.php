@@ -12,6 +12,12 @@
             
             <form action="{{ route('student_profiles.store') }}" method="POST" id="studentprofiles" >
 
+            <form action="{{ route('Student_addresses.store') }}" method="POST" id="studentaddresses" >
+
+            
+
+
+
                 {{ csrf_field() }}
                 
                 <div class="form-group">
@@ -96,7 +102,7 @@
            
         </div>
 
-        <div>
+                <div>
                     <button type="submit" class="btn btn-primary-outline"> Add student data </button>
 
                 </div>
